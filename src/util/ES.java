@@ -1,4 +1,4 @@
-package util ;
+package util;
 
 import java.util.Scanner;
 
@@ -38,6 +38,28 @@ public class ES {
         return numero;
     }
 
+    public static int entradaTeclado(String mensaje) {
+        int numero = 1;
+        boolean leido = false;
+        Scanner teclado = null;
+        do {
+            msgln(mensaje);
+            try {
+                teclado = new Scanner(System.in);
+                numero = teclado.nextInt();
+                if ((numero == 0) | (numero == 1) | (numero == 2) | (numero == 3) | (numero == 4)) {
+                    return numero;
+                } else {
+                    msgln("Error. Introduzca uno de los siguientes números: ");
+                }
+            } catch (Exception e) {
+                msgln("Error: No es un número entero válido. ");
+            }
+
+        } while (numero != 4);
+        return numero;
+    }
+
     /**
      * Este método sirve para escribir el mensaje indicado para solicitar la
      * introducción de un dato desde teclado, y espera la introducción de
@@ -46,7 +68,7 @@ public class ES {
      * suministrado estĂŠ en ese rango.
      *
      * @param mensaje Es el mensaje que se muestra para solicitar la
-     * introducción del número.
+     *                introducción del número.
      * @return El número entero leído.
      */
     public static int leeEntero(String mensaje) {
@@ -73,7 +95,7 @@ public class ES {
      * el valor suministrado estĂŠ en ese rango.
      *
      * @param minimo Es el valor más pequeńo dentro del rango de los números
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *               enteros tipo int que se aceptarĂĄ como válido.
      * @return El número entero leído.
      */
     public static int leeEntero(int minimo) {
@@ -103,10 +125,10 @@ public class ES {
      * sea mayor o igual que el valor mínimo indicado como parámetro. La lectura
      * se estarĂĄ repitiendo hasta que el valor suministrado estĂŠ en ese rango.
      *
-     * @param mensaje  Es el mensaje que se muestra para solicitar la
-     * introducción del número.
+     * @param mensaje Es el mensaje que se muestra para solicitar la
+     *                introducción del número.
      * @param minimo  Es el valor más pequeńo dentro del rango de los números
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *                enteros tipo int que se aceptarĂĄ como válido.
      * @return El número entero leído.
      */
     public static int leeEntero(String mensaje, int minimo) {
@@ -138,10 +160,10 @@ public class ES {
      * sea mayor o igual que el valor mínimo indicado como parámetro. La lectura
      * se estarĂĄ repitiendo hasta que el valor suministrado estĂŠ en ese rango.
      *
-     * @param mensaje  Es el mensaje que se muestra para solicitar la
-     * introducción del número.
+     * @param mensaje Es el mensaje que se muestra para solicitar la
+     *                introducción del número.
      * @param minimo  Es el valor más pequeńo dentro del rango de los números
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *                enteros tipo int que se aceptarĂĄ como válido.
      * @return El número entero leído.
      */
     public static int entradaGrado(String mensaje, int minimo) {
@@ -174,12 +196,12 @@ public class ES {
      * que el valor suministrado estĂŠ en ese rango.
      *
      * @param minimo Es el valor más pequeńo dentro del rango de los números
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *               enteros tipo int que se aceptarĂĄ como válido.
      * @param maximo Es el valor más alto dentro del rango de los números
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *               enteros tipo int que se aceptarĂĄ como válido.
      * @return El número entero leí­do.
      * @throws IllegalArgumentException Lanza excepción si el parámetro mínimo
-     *   es mayor que el mínimo.
+     *                                  es mayor que el mínimo.
      */
     public static int leeEntero(int minimo, int maximo) throws IllegalArgumentException {
         int numero = 0;
@@ -217,14 +239,14 @@ public class ES {
      * rango.
      *
      * @param mensaje Es el mensaje que se muestra para solicitar la
-     * introducción del número.
-     * @param minimo Es el valor más pequeńo dentro del rango de los números
-     * enteros tipo int que se aceptará como válido.
-     * @param maximo Es el valor más alto dentro del rango de los números.
-     * enteros tipo int que se aceptarĂĄ como válido.
+     *                introducción del número.
+     * @param minimo  Es el valor más pequeńo dentro del rango de los números
+     *                enteros tipo int que se aceptará como válido.
+     * @param maximo  Es el valor más alto dentro del rango de los números.
+     *                enteros tipo int que se aceptarĂĄ como válido.
      * @return El número entero leído.
      * @throws IllegalArgumentException Lanza excepción si el parámetro mínimo
-     *   es mayor que el mínimo.
+     *                                  es mayor que el mínimo.
      */
     public static int leeEntero(String mensaje, int minimo, int maximo) throws IllegalArgumentException {
         int numero = 0;
@@ -254,7 +276,6 @@ public class ES {
     }
 
 
-
     /**
      * Este método lee una cadena de caracteres desde teclado, y comprueba que
      * efectivamente la lectura se ha producido correctamente, mandando un
@@ -281,7 +302,7 @@ public class ES {
      * caso de que haya fallado.
      *
      * @param mensaje Es el mensaje que se envía solicitando la introducción
-     * de la cadena de texto.
+     *                de la cadena de texto.
      * @return La cadena de caracteres leído desde el teclado.
      */
     public static String leeCadena(String mensaje) {
@@ -301,7 +322,7 @@ public class ES {
      * pero tiene la ventaja de que su escritura es más corta y ahorra algo de
      * trabajo en programas donde la sentencia System.out.print() se use mucho.
      *
-     * @param entero  Es es el valor entero de tipo int a imprimir como texto.
+     * @param entero Es es el valor entero de tipo int a imprimir como texto.
      */
     public static void msg(int entero) {
         System.out.print(entero);
@@ -313,7 +334,7 @@ public class ES {
      * trabajo en programas donde la sentencia System.out.print() se use mucho.
      *
      * @param enteroLargo Es es el valor entero de tipo long a imprimir como
-     * texto.
+     *                    texto.
      */
     public static void msg(long enteroLargo) {
         System.out.print(enteroLargo);
@@ -324,7 +345,7 @@ public class ES {
      * pero tiene la ventaja de que su escritura es más corta y ahorra algo de
      * trabajo en programas donde la sentencia System.out.print() se use mucho.
      *
-     * @param real  Es es el valor real de tipo float a imprimir como texto.
+     * @param real Es es el valor real de tipo float a imprimir como texto.
      */
     public static void msg(float real) {
         System.out.print(real);
@@ -336,7 +357,7 @@ public class ES {
      * trabajo en programas donde la sentencia System.out.print() se use mucho.
      *
      * @param realLargo Es es el valor entero de tipo double a imprimir como
-     * texto.
+     *                  texto.
      */
     public static void msg(double realLargo) {
         System.out.print(realLargo);
@@ -348,7 +369,7 @@ public class ES {
      * trabajo en programas donde la sentencia System.out.print() se use mucho.
      *
      * @param cadenaAImprimir Es la cadena de texto que hay que escribir en
-     * el dispositivo de salida estĂĄndar.
+     *                        el dispositivo de salida estĂĄndar.
      */
     public static void msg(String cadenaAImprimir) {
         System.out.print(cadenaAImprimir);
@@ -383,7 +404,7 @@ public class ES {
      * mucho.
      *
      * @param enteroLargo Es es el valor entero de tipo long a imprimir como
-     * texto.
+     *                    texto.
      */
     public static void msgln(long enteroLargo) {
         System.out.println(enteroLargo);
@@ -408,7 +429,7 @@ public class ES {
      * mucho.
      *
      * @param realLargo Es es el valor entero de tipo double a imprimir como
-     * texto.
+     *                  texto.
      */
     public static void msgln(double realLargo) {
         System.out.println(realLargo);
@@ -421,12 +442,11 @@ public class ES {
      * mucho.
      *
      * @param cadenaAImprimir Es la cadena de texto que hay que escribir en
-     * el dispositivo de salida estĂĄndar.
+     *                        el dispositivo de salida estĂĄndar.
      */
     public static void msgln(String cadenaAImprimir) {
         System.out.println(cadenaAImprimir);
     }
-
 
 
     /**
@@ -435,12 +455,9 @@ public class ES {
      *
      * @param mensaje  Es el mensaje que se envía solicitando la introducción
      * de la fecha.
-     * @return  Una fecha como String en formato dd-mm-aa, ya validada y
+     * @return Una fecha como String en formato dd-mm-aa, ya validada y
      * correcta.
      */
-
-
-
 
 
     /**
@@ -448,8 +465,8 @@ public class ES {
      * mostrando por pantalla la pregunta en cuestiĂłn. Síłlo se admiten como
      * respuestas
      *
-     * @param mensaje  Es el mensaje que se envía con la pregunta cuya
-     * respuesta se espera que sea Sí­ o No.
+     * @param mensaje Es el mensaje que se envía con la pregunta cuya
+     *                respuesta se espera que sea Sí­ o No.
      * @return la cadena "S" si se ha respondido "S" o "s" y la cadena "N" si se
      * ha respondido "N" o "n".
      */
@@ -462,7 +479,7 @@ public class ES {
             try {
                 teclado = new Scanner(System.in);
                 cadena = teclado.nextLine();
-                if ( cadena!= null && cadena.length() == 1 && ((cadena.equalsIgnoreCase("S")) || (cadena.equalsIgnoreCase("N")))) {
+                if (cadena != null && cadena.length() == 1 && ((cadena.equalsIgnoreCase("S")) || (cadena.equalsIgnoreCase("N")))) {
                     correcta = true;
                 } else {
                     ES.msgln("Error: Solo se admite como respuesta un Ăşnico carĂĄcter, que debe ser 's', 'S', 'n' o 'N'.");
@@ -473,7 +490,6 @@ public class ES {
         } while (!correcta);
         return cadena.toUpperCase();
     }
-
 
 
 }//class ES

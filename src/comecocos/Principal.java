@@ -1,9 +1,11 @@
 package comecocos;
 
 import comecocos.Comecocos.Direccion;
-import util.ES;
 
 import java.util.Scanner;
+
+import static util.ES.leeEntero;
+import static util.ES.msgln;
 
 
 /**
@@ -42,8 +44,8 @@ public class Principal {
 
         // Pedir los datos iniciales para crear otro comecocos
 
-        x = ES.leeEntero("Introduce la posición x del comecocos: ", 0);
-        y = ES.leeEntero("Introduce la posición y del comecocos: ", 0);
+        x = leeEntero("Introduce la posición x del comecocos: ", 0);
+        y = leeEntero("Introduce la posición y del comecocos: ", 0);
 
         Scanner entrada = new Scanner(System.in);
         System.out.println("Introduce la dirección del comecocos (0, 90, 180, 270): ");
@@ -53,8 +55,9 @@ public class Principal {
         creamos el objeto con los datos leídos */
 
         if (numeroEntero(entradaGrados)) {
+            dir = Comecocos.gradosAdireccion(entradaGrados);
             Comecocos player1 = new Comecocos(x, y, dir);
-            player1.gradosAdireccion(entradaGrados);
+
 
             // Escribir posición inicial
             System.out.println("El comecocos recién creado está en: " + player1);
@@ -63,74 +66,43 @@ public class Principal {
 
             int eleccion;
             do {
-                eleccion = entradaTeclado(String.format("0-> Avanzar 10 pasos.\n1-> Girar a la derecha.\n2-> Girar a la izquierda.\n3-> Emitir sonido.\n4-> Salir del programa."));
+                /**
+                 * Método que está continuamente leyendo de teclado un número entero,
+                 * indicando al usuario las opciones:
+                 * 0-> Avanzar 10 pasos.
+                 * 1-> Girar a la derecha.
+                 * 2-> Girar a la izquierda.
+                 * 3-> Emitir sonido.
+                 * 4-> Salir del programa
+                 */
+                eleccion = leeEntero("0-> Avanzar 10 pasos.\n1-> Girar a la derecha.\n2-> Girar a la izquierda.\n3-> Emitir sonido.\n4-> Salir del programa.", 0, 4);
                 switch (eleccion) {
                     case 0:
                         player1.setAvanzar(10);
-                        System.out.println("El comecocos está en: " + player1);
+                        msgln(player1.toString());
                         break;
                     case 1:
                         player1.setGiraDerecha();
-                        System.out.println("El comecocos está en: " + player1);
+                        msgln(player1.toString());
                         break;
                     case 2:
                         player1.setGiraIzquierda();
-                        System.out.println("El comecocos está en: " + player1);
+                        msgln(player1.toString());
                         break;
                     case 3:
-                        player1.ReproducirSonido("/Users/garbarok/IdeaProjects/Comecocos/src/recursos/pacmandie.wav");
+                        player1.reproducirSonido("src/recursos/pacmandie.wav");
                         break;
                 }
             } while (eleccion != 4);
+            System.out.println("El comecocos ha finalizado con las " + player1.toString());
         } else {
             System.out.println("Juego terminado, no introdujo los grados correctamente. ");
         }
-
 
         // SINO
         // Indica que el se juego se ha terminado.
 
     }
-
-
-    /**
-     * Método que está continuamente leyendo de teclado un número entero,
-     * indicando al usuario las opciones:
-     * 0-> Avanzar 10 pasos.
-     * 1-> Girar a la derecha.
-     * 2-> Girar a la izquierda.
-     * 3-> Emitir sonido.
-     * 4-> Salir del programa
-     *
-     * @param mensaje Objeto comecocos creado al principio del programa,
-     *                <p>
-     *                Método que comprueba si es válido el número introducido, entendiendo por válido que
-     *                sea uno de los siguientes valores: 0, 90, 180 o bien 360.
-     * @return Devuelve true si el parámetro recibido es 0, 90, 180 o bien 360.
-     */
-
-    private static int entradaTeclado(String mensaje) {
-        int numero = 1;
-        boolean leido = false;
-        Scanner teclado = null;
-        do {
-            ES.msgln(mensaje);
-            try {
-                teclado = new Scanner(System.in);
-                numero = teclado.nextInt();
-                if ((numero == 0) | (numero == 1) | (numero == 2) | (numero == 3) | (numero == 4)) {
-                    return numero;
-                } else {
-                    ES.msgln("Error. Introduzca uno de los siguientes números: ");
-                }
-            } catch (Exception e) {
-                ES.msgln("Error: No es un número entero válido. ");
-            }
-
-        } while (numero != 4);
-        return numero;
-    }
-
 
     /**
      * Método que comprueba si es válido el número introducido, entendiendo por válido que
@@ -145,18 +117,6 @@ public class Principal {
         return esEntero;
     }
 }
-
-
-// Mientras que no se cumpla la condición de terminación
-
-
-// Informar de opciones y leer número entero correspondiente a la opción a ejecutar
-
-
-// Según lo leído, invocar al método pertienente
-
-
-// Informar sobre la posición del comecocos
 
 
 

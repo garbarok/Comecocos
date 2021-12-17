@@ -5,141 +5,145 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The type Comecocos.
+ * Clase Comecocos
  */
 public class Comecocos {
 
     private int x;
     private int y;
+    private Direccion direccion;
 
     /**
-     * The enum Direccion.
-     */
-    public static enum Direccion {
-        /**
-         * Norte direccion.
-         */
-        NORTE,
-        /**
-         * Sur direccion.
-         */
-        SUR,
-        /**
-         * Este direccion.
-         */
-        ESTE,
-        /**
-         * Oeste direccion.
-         */
-        OESTE}
-
-    /**
-     * The Dir.
-     */
-    Direccion dir;
-
-    /**
-     * Instantiates a new Comecocos.
+     * Instancias de comecocos que recibe x,y,direccion
      *
-     * @param x   the x
-     * @param y   the y
-     * @param dir the dir
+     * @param x         the x
+     * @param y         the y
+     * @param direccion the direccion
      */
-    public Comecocos(int x, int y, Direccion dir) {
+    public Comecocos(int x, int y, Direccion direccion) {
         this.x = x;
         this.y = y;
-        this.dir = dir;
+        this.direccion = direccion;
     }
 
+
     /**
-     * Instantiates a new Comecocos.
+     * Instancia de Comecocos cuando no recibe parámetros.
      */
     public Comecocos() {
-        this.x = 0;
-        this.y = 0;
-        this.dir = Direccion.NORTE;
+        x = 0;
+        y = 0;
+        direccion = Direccion.NORTE;
     }
 
     /**
-     * Getter.
+     * Grados adireccion string.
+     * Metodo estatico que transforma los grados que recibe
+     * por parametro a tipo direccion.
+     * @param grados the grados
+     * @return the string
+     */
+    public static Direccion gradosAdireccion(int grados) {
+        Direccion convertida = null;
+        switch (grados) {
+            case 0:
+                convertida = Direccion.NORTE;
+                break;
+            case 90:
+                convertida = Direccion.ESTE;
+                break;
+            case 180:
+                convertida = Direccion.SUR;
+                break;
+            case 270:
+                convertida = Direccion.OESTE;
+                break;
+        }
+        return convertida; // Devuelve la direccion ya convertida
+
+    }
+    /**
+     * ToString.
+     * Metodo que devuelve un mensaje con la información que queremos.
      *
-     * @return abscisa (columna).
+     * @return the string
+     */
+    public String toString() {
+        return "Coordenadas x=" + x + ", y=" + y + ", con dirección=" + direccion;
+    }
+
+    /**
+     * Gets x.
+     *
+     * @return the x
      */
     public int getX() {
         return x;
     }
 
     /**
-     * Getter.
-     *
-     * @return ordenada (fila).
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * Getter.
-     *
-     * @return Dirección. direccion
-     */
-    public Direccion getDireccion() {
-        return dir;
-    }
-
-    /**
-     * Setter.
+     * Sets x.
      *
      * @param x the x
-     * @return ordenada (fila).
      */
     public void setX(int x) {
         this.x = x;
     }
 
     /**
-     * Setter.
+     * Gets y.
+     *
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * Sets y.
      *
      * @param y the y
-     * @return abcisa (fila).
      */
     public void setY(int y) {
         this.y = y;
     }
 
     /**
-     * Setter.
+     * Gets direccion.
      *
-     * @param dir the dir
-     * @return dirección
+     * @return the direccion
      */
-    public void setDireccion(Direccion dir) {
-        this.dir = dir;
+    public Direccion getDireccion() {
+        return direccion;
     }
 
-    public String toString() {
-        String mensaje = "Coordenadas x=" + x + ", y=" + y + ", con dirección=" + dir;
-        return mensaje;
+    /**
+     * Sets direccion.
+     *
+     * @param direccion the direccion
+     */
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
-
 
     /**
      * Sets gira derecha.
+     * Metodo set que gira el comecocos a la derecha cambiando el atributo direccion.
      */
     public void setGiraDerecha() {
 
-        switch (dir) {
+        switch (direccion) {
             case NORTE:
-                dir = Direccion.ESTE;
+                direccion = Direccion.ESTE;
                 break;
             case ESTE:
-                dir = Direccion.SUR;
+                direccion = Direccion.SUR;
                 break;
             case SUR:
-                dir = Direccion.OESTE;
+                direccion = Direccion.OESTE;
                 break;
             case OESTE:
-                dir = Direccion.NORTE;
+                direccion = Direccion.NORTE;
                 break;
         }
     }
@@ -149,35 +153,38 @@ public class Comecocos {
      */
     public void setGiraIzquierda() {
 
-        switch (dir) {
+        switch (direccion) {
             case NORTE:
-                dir = Direccion.OESTE;
+                direccion = Direccion.OESTE;
                 break;
             case OESTE:
-                dir = Direccion.SUR;
+                direccion = Direccion.SUR;
                 break;
             case SUR:
-                dir = Direccion.ESTE;
+                direccion = Direccion.ESTE;
                 break;
             case ESTE:
-                dir = Direccion.NORTE;
+                direccion = Direccion.NORTE;
                 break;
         }
     }
 
     /**
      * Sets avanzar.
-     *
+     *Metodo que hace avanzar 10 pasos adelante en el eje en el que se encuentre
+     * mirando al comecocos. Obitiene que direccion tiene el comecocos y segun esta añade
+     * el valor de los pasos o los resta al eje de abcisas u ordenadas segun
+     * corresponda.
      * @param pasos the pasos
      */
     public void setAvanzar(int pasos) {
         if (getDireccion().equals(Direccion.NORTE)) {
-            y = y - pasos;
+            y = y + pasos;
             setY(y);
         } else if (getDireccion().equals(Direccion.ESTE)) {
             x = x + pasos;
         } else if (getDireccion().equals(Direccion.SUR)) {
-            y = y + pasos;
+            y = y - pasos;
             setY(y);
         } else if (getDireccion().equals(Direccion.OESTE)) {
             x = x - pasos;
@@ -187,45 +194,15 @@ public class Comecocos {
     }
 
     /**
-     * Grados adireccion string.
-     *
-     * @param grados the grados
-     * @return the string
-     */
-    public String gradosAdireccion(int grados) {
-
-        switch (grados) {
-            case 0:
-                setDireccion(Direccion.NORTE);
-                break;
-            case 90:
-                setDireccion(Direccion.ESTE);
-
-                break;
-            case 180:
-                setDireccion(Direccion.SUR);
-
-                break;
-            case 270:
-                setDireccion(Direccion.OESTE);
-
-                break;
-        }
-
-        return String.valueOf(getDireccion());
-
-    }
-
-    /**
      * Direccion agrados int.
-     *
-     * @param dir the dir
+     * Metodo que pasa la direccion del tipo direccion a grados numericos.
+     * @param direccion the direccion
      * @return the int
      */
-    public int direccionAgrados(Direccion dir) {
+    public int direccionAgrados(Direccion direccion) {
 
-        int grados = 0;
-        switch (dir) {
+        int grados = 1;
+        switch (direccion) {
             case NORTE:
                 grados = 0;
                 break;
@@ -247,7 +224,7 @@ public class Comecocos {
      *
      * @param nombreSonido the nombre sonido
      */
-    public void ReproducirSonido(String nombreSonido){
+    public void reproducirSonido(String nombreSonido) {
 
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
@@ -255,11 +232,33 @@ public class Comecocos {
             clip.open(audioInputStream);
             clip.start();
             Thread.sleep(2000);
-        } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             System.out.println("Error al reproducir el sonido.");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * The enum Direccion.
+     */
+    enum Direccion {
+        /**
+         * Norte direccion.
+         */
+        NORTE,
+        /**
+         * Sur direccion.
+         */
+        SUR,
+        /**
+         * Este direccion.
+         */
+        ESTE,
+        /**
+         * Oeste direccion.
+         */
+        OESTE
     }
 
 
